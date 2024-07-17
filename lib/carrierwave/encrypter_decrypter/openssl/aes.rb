@@ -12,8 +12,8 @@ module Openssl
         model.key = key
         model.save!
 
-        original_file_path = File.expand_path(obj.store_path, obj.root)
-        encrypted_file_path = File.expand_path(obj.store_path, obj.root) + ".enc"
+        original_file_path =  obj.send(mounted_as).path
+        encrypted_file_path =  obj.send(mounted_as).path  + ".enc"
         buf = ""
         File.open(encrypted_file_path, "wb") do |outf|
           File.open(model.send(mounted_as).path, "rb") do |inf|
