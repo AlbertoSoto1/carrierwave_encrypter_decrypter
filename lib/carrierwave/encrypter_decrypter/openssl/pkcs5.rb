@@ -26,8 +26,8 @@ module Openssl
         key = OpenSSL::PKCS5.pbkdf2_hmac(pwd, salt, iter, key_len, digest)
         cipher.key = key
 
-        original_file_path = File.expand_path(obj.store_path, obj.root)
-        encrypted_file_path = File.expand_path(obj.store_path, obj.root) + ".enc"
+        original_file_path =  obj.send(mounted_as).path
+        encrypted_file_path =  obj.send(mounted_as).path  + ".enc"
         model.save!
 
 
